@@ -1,0 +1,99 @@
+@startuml title "Central Nuclear"
+
+class CentralNuclear {
+    - reactor: Reactor
+    - sensorTemp: SensorTemperatura
+    - refrigeraciones: SistemaDeRefrigeracion[]
+    - empleados: Empleado[]
+    + activarEnfriamiento() 
+    + verificarTemperatura() 
+    + generarEnergia() 
+}
+
+class Reactor implements NotificarEmpleado{
+    - temperatura: SensorTemperatura
+    - estado: Estado
+    - capacidadMaxima: int
+    - produccion: Produccion
+    - refrigeracion: SistemaDeRefrigeracion
+    + Reactor() 
+    + getTemperatura(): float 
+    + getEstado(): Estado 
+    + setEstado(estado: Estado)
+    + setRefrigeracion(ref: SistemaDeRefrigeracion)
+    + reducirTemp()
+    + producir(temp: number, estado: Estado): number
+    + produccionEnXHoras(cant: number): number
+}
+note left of Reactor::reducirTemp
+    this.refrigeracion.reducirTemp(this.sensorTemp)
+end note
+
+enum Estado {
+    APAGADO
+    NORMAL
+    DE_DISMINUCION
+}
+
+
+Interface NotificarEmpleado {
+    + notificar(emp: Empleado, notif: Notificacion)
+}
+
+class Produccion {
+    - m
+    - n
+    + producir(temp: number, estado: Estado): number
+}
+
+
+class SensorTemperatura {
+    - temperatura: float
+    + SensorTemperatura() 
+    + getTemperatura(): float 
+    + setTemperatura(temp: float) 
+}
+
+abstract class SistemaDeRefrigeracion {
+    + prender()
+    + apagar()
+    + abstract reducirTemp(temp: SensorTemperatura)
+}
+
+class BarraControl extends SistemaDeRefrigeracion {
+    - porcentajeReduccion: number
+    - vidaUtil: number
+    + BarraControl(vidaUtil: number) 
+    + getPorcentajeReduccion(): number 
+    + reducirTemp(temp: SensorTemperatura)
+}
+
+class Turbina extends SistemaDeRefrigeracion { 
+    + reducirTemp(temp: SensorTemperatura)
+
+}
+
+abstract class Empleado {
+    - tareas: Notificacion[]
+    + abstract manejarTareas() 
+}
+
+enum Notificacion {
+    ESTADO_CRITICO
+}
+
+CentralNuclear o-d- Reactor
+Reactor *.r. Estado
+Reactor o-- SistemaDeRefrigeracion
+Reactor o-- SensorTemperatura
+Reactor o-- Produccion
+Reactor o-r- Empleado
+Empleado *.u. Notificacion
+Empleado <|-r- Homero
+
+SistemaDeRefrigeracion o.[hidden]r. Produccion
+SistemaDeRefrigeracion o.[hidden]l. SensorTemperatura
+SistemaDeRefrigeracion o.[hidden]u. Reactor
+Estado o.[hidden]u. NotificarEmpleado
+
+@enduml
