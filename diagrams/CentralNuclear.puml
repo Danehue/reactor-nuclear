@@ -82,7 +82,7 @@ enum Notificacion {
     ESTADO_CRITICO
 }
 
-CentralNuclear o-d- Reactor
+CentralNuclear *-d- Reactor
 Reactor *.r. Estado
 Reactor o-- SistemaDeRefrigeracion
 Reactor o-- SensorTemperatura

@@ -1,0 +1,70 @@
+@startuml
+
+class CentralNuclear {
+    - reactor: Reactor
+}
+
+class Reactor {
+    - combustible: Combustible
+    - capacidad: int
+    - sensorTemperatura: Sensor
+    - mecanismoBarrasDeControl: MecanismoBarrasDeControl
+    - mecanismoTurbinas: TurbinasDeRefrigeracion
+    - estado: 
+    + Constructor(capacidad: int)
+    + iniciar()
+    + detener()
+}
+
+class Combustible {
+    - tipo: string ?
+}
+
+class Sensor {
+    + getTemperatura()
+}
+
+interface MecanismoDeControl {
+    + enfriar()
+}
+
+class MecanismoBarrasDeControl implements MecanismoDeControl {
+    - barras: Barra[]
+    + enfriar()
+}
+class Barra {
+    - vidaUtil: int
+    + getPorcentajeReduccion()
+}
+
+class TurbinasDeRefrigeracion implements MecanismoDeControl {
+    + enfriar()
+}
+
+interface ManejadorEstadoReactor {
+    - suscriptores: Suscriptor[]
+    + notificar()
+}
+
+interface Suscriptor {
+    
+}
+
+class Operador implements Suscriptor {
+    
+}
+
+'Relaciones
+CentralNuclear *.. Reactor
+
+Reactor o.. Combustible
+Reactor o.. Sensor
+Reactor o.. MecanismoBarrasDeControl
+Reactor o.r. TurbinasDeRefrigeracion
+Reactor o.l. ManejadorEstadoReactor
+
+ManejadorEstadoReactor o.. Suscriptor
+MecanismoBarrasDeControl o.. Barra
+
+TurbinasDeRefrigeracion o.r[hidden]. MecanismoDeControl
+@enduml
