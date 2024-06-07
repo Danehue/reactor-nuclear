@@ -5,24 +5,29 @@ class CentralNuclear {
 }
 
 class Reactor {
-    - combustible: Combustible
+    - combustible: float
     - capacidad: int
-    - sensorTemperatura: Sensor
-    - mecanismoBarrasDeControl: MecanismoBarrasDeControl
-    - mecanismoTurbinas: TurbinasDeRefrigeracion
-    - estado: 
-    + Constructor(capacidad: int)
+    - sensor: Sensor
+    - mecanismoDeControl: MecanismoDeControl
+    - notificador: NotificadorEstadoReactor
+    - estado: Estado
+    + Constructor(capacidad: int, e: Estado)
     + iniciar()
+    + producir()
     + detener()
-}
-
-class Combustible {
-    - tipo: string ?
+    + cambiarEstado(temp: float)
 }
 
 class Sensor {
+    - temperatura: float
+    - suscriptor: Reactor
+    + suscribir(r: Reactor)
+    + desuscribir(r: Reactor)
+    + notificar()
     + getTemperatura()
+    + setTemperatura(temp: float)
 }
+
 
 interface MecanismoDeControl {
     + enfriar()
@@ -37,34 +42,73 @@ class Barra {
     + getPorcentajeReduccion()
 }
 
-class TurbinasDeRefrigeracion implements MecanismoDeControl {
-    + enfriar()
-}
 
-interface ManejadorEstadoReactor {
+class NotificadorEstadoReactor {
     - suscriptores: Suscriptor[]
+
+    + suscribir(s: Suscriptor)
+    + desuscribir(s: Suscriptor)
     + notificar()
 }
 
 interface Suscriptor {
-    
+    + actualizar(e: Estado)
 }
 
 class Operador implements Suscriptor {
-    
+    + actualizar(e: Estado)
 }
+
+abstract Estado {
+    + abstract cambiarEstado(temp: float)
+    + producir()
+}
+class Normal extends Estado{
+    + cambiarEstado(temp: float)
+    - cambiarACriticidad(): boolean
+}
+class Critico extends Estado{
+    + cambiarEstado(temp: float)
+    + producir()
+    - cambiarACritico(): boolean
+    - cambiarANormal(): boolean
+}
+class Apagado extends Estado{
+    + cambiarEstado(temp: float)
+    + producir()
+    - cambiarANormal(): boolean
+}
+
 
 'Relaciones
 CentralNuclear *.. Reactor
 
-Reactor o.. Combustible
+' Reactor o.. Combustible
 Reactor o.. Sensor
-Reactor o.. MecanismoBarrasDeControl
-Reactor o.r. TurbinasDeRefrigeracion
-Reactor o.l. ManejadorEstadoReactor
+Reactor o.r. MecanismoDeControl
+Reactor o.l. NotificadorEstadoReactor
+Reactor o.. Estado
 
-ManejadorEstadoReactor o.. Suscriptor
+NotificadorEstadoReactor o.. Suscriptor
 MecanismoBarrasDeControl o.. Barra
 
-TurbinasDeRefrigeracion o.r[hidden]. MecanismoDeControl
+MecanismoBarrasDeControl o.r[hidden]. MecanismoDeControl
+
+Note right of Reactor::producir 
+    estado.producir()
+end Note
+Note right of Reactor::cambiarEstado 
+    estado.cambiarEstado()
+end Note
+Note left of Sensor::notificar 
+    suscriptor.cambiarEstado(getTemperatura())
+end Note
+Note left of Sensor::setTemperatura 
+    this.temperatura = temp
+    this.notificar()
+end Note
+Note left of Normal::cambiarEstado 
+    ... estadoCritico++
+end Note
+
 @enduml
