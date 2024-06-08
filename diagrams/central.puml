@@ -5,24 +5,31 @@ class CentralNuclear {
 }
 
 class Reactor {
-    - combustible: Combustible
+    - operadores: Operador[]
+    - combustible: float
     - capacidad: int
-    - sensorTemperatura: Sensor
-    - mecanismoBarrasDeControl: MecanismoBarrasDeControl
-    - mecanismoTurbinas: TurbinasDeRefrigeracion
-    - estado: 
-    + Constructor(capacidad: int)
+    - sensor: Sensor
+    - mecanismoDeControl: MecanismoDeControl
+    - notificador: NotificadorEstadoReactor
+    - estado: Estado
+    - info: InfoEstadoReactor
+    + Constructor(capacidad: int, e: Estado)
     + iniciar()
+    + producir()
     + detener()
-}
-
-class Combustible {
-    - tipo: string ?
+    + cambiarEstado(temp: float)
 }
 
 class Sensor {
+    - temperatura: float
+    - suscriptor: Reactor
+    + suscribir(r: Reactor)
+    + desuscribir(r: Reactor)
+    + notificar()
     + getTemperatura()
+    + setTemperatura(temp: float)
 }
+
 
 interface MecanismoDeControl {
     + enfriar()
@@ -37,34 +44,104 @@ class Barra {
     + getPorcentajeReduccion()
 }
 
-class TurbinasDeRefrigeracion implements MecanismoDeControl {
-    + enfriar()
-}
 
-interface ManejadorEstadoReactor {
+class NotificadorEstadoReactor {
     - suscriptores: Suscriptor[]
-    + notificar()
+    - jefe: Suscriptor
+
+    + suscribir(s: Suscriptor)
+    + suscribir(j: Jefe)
+    + desuscribir(s: Suscriptor)
+    + desuscribir(j: Jefe)
+    + notificar(x: CambioEstado)
 }
 
 interface Suscriptor {
-    
+    + actualizar()
 }
 
 class Operador implements Suscriptor {
-    
+    - mecanismo: MecanismoDeControl
+    + constructor(m: MecanismoDeControl)
+    + actualizar()
+}
+
+class Jefe implements Suscriptor{
+    + actualizar()
+}
+
+abstract Estado {
+    + abstract cambiarEstado(temp: float): CambioEstado
+    + producir()
+}
+class Normal extends Estado{
+    + cambiarEstado(temp: float): CambioEstado
+    - cambiarACriticidad(): boolean
+}
+class Critico extends Estado{
+    + cambiarEstado(temp: float): CambioEstado
+    + producir()
+    - cambiarACritico(): boolean
+    - cambiarANormal(): boolean
+}
+class Apagado extends Estado{
+    + cambiarEstado(temp: float): CambioEstado
+    + producir()
+    - cambiarANormal(): boolean
+}
+
+enum CambioEstado {
+    NO_CAMBIO
+    NORMAL
+    CRITICO
+    APAGADO
+}
+
+class InfoEstadoReactor {
+    - mapaInfo: Map
+    + constructor()
 }
 
 'Relaciones
 CentralNuclear *.. Reactor
 
-Reactor o.. Combustible
+' Reactor o.. Combustible
 Reactor o.. Sensor
-Reactor o.. MecanismoBarrasDeControl
-Reactor o.r. TurbinasDeRefrigeracion
-Reactor o.l. ManejadorEstadoReactor
+Reactor o.r. MecanismoDeControl
+Reactor o.l. NotificadorEstadoReactor
+Reactor o.. Estado
+Reactor o.. InfoEstadoReactor
+Reactor o.. Operador
 
-ManejadorEstadoReactor o.. Suscriptor
+NotificadorEstadoReactor o.u. Suscriptor
 MecanismoBarrasDeControl o.. Barra
 
-TurbinasDeRefrigeracion o.r[hidden]. MecanismoDeControl
+MecanismoBarrasDeControl o.r[hidden]. MecanismoDeControl
+Suscriptor o.u[hidden]. Operador
+
+Note right of Reactor::producir 
+    estado.producir()
+end Note
+Note right of Reactor::cambiarEstado 
+    x = estado.cambiarEstado()
+    agregar x al mapa
+    notificador.notificar(x)
+end Note
+Note left of Sensor::notificar 
+    suscriptor.cambiarEstado(getTemperatura())
+end Note
+Note left of Sensor::setTemperatura 
+    this.temperatura = temp
+    this.notificar()
+end Note
+Note left of InfoEstadoReactor::constructor 
+    inicializar el mapa
+end Note
+Note left of NotificadorEstadoReactor::notificar 
+    if(x == CambioEstado.CRITICO) ...
+end Note
+Note left of Operador::actualizar 
+    mecanismo.enfriar()
+end Note
+
 @enduml
