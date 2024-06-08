@@ -17,7 +17,7 @@ class Reactor {
     + iniciar()
     + producir()
     + detener()
-    + cambiarEstado(temp: float)
+    + cambiarEstado(temp: float, e: EstadoSetter)
 }
 
 class Sensor {
@@ -72,9 +72,14 @@ class Jefe implements Suscriptor{
 }
 
 abstract Estado {
-    + abstract cambiarEstado(temp: float): CambioEstado
+    + abstract cambiarEstado(temp: float, e: EstadoSetter): CambioEstado
     + producir()
 }
+
+interface EstadoSetter {
+    + setEstado(e: Estado)
+}
+
 class Normal extends Estado{
     + cambiarEstado(temp: float): CambioEstado
     - cambiarACriticidad(): boolean
@@ -113,6 +118,7 @@ Reactor o.l. NotificadorEstadoReactor
 Reactor o.. Estado
 Reactor o.. InfoEstadoReactor
 Reactor o.. Operador
+Reactor ..|> EstadoSetter
 
 NotificadorEstadoReactor o.u. Suscriptor
 MecanismoBarrasDeControl o.. Barra
