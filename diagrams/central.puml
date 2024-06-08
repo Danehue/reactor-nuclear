@@ -60,25 +60,32 @@ class Operador implements Suscriptor {
 }
 
 abstract Estado {
-    + abstract cambiarEstado(temp: float)
+    + abstract cambiarEstado(temp: float): int
     + producir()
 }
 class Normal extends Estado{
-    + cambiarEstado(temp: float)
+    + cambiarEstado(temp: float): int
     - cambiarACriticidad(): boolean
 }
 class Critico extends Estado{
-    + cambiarEstado(temp: float)
+    + cambiarEstado(temp: float): int
     + producir()
     - cambiarACritico(): boolean
     - cambiarANormal(): boolean
 }
 class Apagado extends Estado{
-    + cambiarEstado(temp: float)
+    + cambiarEstado(temp: float): int
     + producir()
     - cambiarANormal(): boolean
 }
 
+enum CambioEstado
+
+class InfoEstadoReactor {
+    - cantNormal: int
+    - cantCritico: int
+    - cantApagado: int
+}
 
 'Relaciones
 CentralNuclear *.. Reactor
@@ -88,6 +95,7 @@ Reactor o.. Sensor
 Reactor o.r. MecanismoDeControl
 Reactor o.l. NotificadorEstadoReactor
 Reactor o.. Estado
+Reactor o.. InfoEstadoReactor
 
 NotificadorEstadoReactor o.. Suscriptor
 MecanismoBarrasDeControl o.. Barra
@@ -99,6 +107,7 @@ Note right of Reactor::producir
 end Note
 Note right of Reactor::cambiarEstado 
     estado.cambiarEstado()
+
 end Note
 Note left of Sensor::notificar 
     suscriptor.cambiarEstado(getTemperatura())
