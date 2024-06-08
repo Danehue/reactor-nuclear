@@ -37,6 +37,7 @@ interface MecanismoDeControl {
 
 class MecanismoBarrasDeControl implements MecanismoDeControl {
     - barras: Barra[]
+    - cantUtilizada: int
     + enfriar()
 }
 class Barra {
