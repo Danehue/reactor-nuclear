@@ -5,12 +5,14 @@ class CentralNuclear {
 }
 
 class Reactor {
+    - operadores: Operador[]
     - combustible: float
     - capacidad: int
     - sensor: Sensor
     - mecanismoDeControl: MecanismoDeControl
     - notificador: NotificadorEstadoReactor
     - estado: Estado
+    - info: InfoEstadoReactor
     + Constructor(capacidad: int, e: Estado)
     + iniciar()
     + producir()
@@ -45,46 +47,59 @@ class Barra {
 
 class NotificadorEstadoReactor {
     - suscriptores: Suscriptor[]
+    - jefe: Suscriptor
 
     + suscribir(s: Suscriptor)
+    + suscribir(j: Jefe)
     + desuscribir(s: Suscriptor)
-    + notificar()
+    + desuscribir(j: Jefe)
+    + notificar(x: CambioEstado)
 }
 
 interface Suscriptor {
-    + actualizar(e: Estado)
+    + actualizar()
 }
 
 class Operador implements Suscriptor {
-    + actualizar(e: Estado)
+    - mecanismo: MecanismoDeControl
+    + constructor(m: MecanismoDeControl)
+    + actualizar()
+}
+
+class Jefe implements Suscriptor{
+    + actualizar()
 }
 
 abstract Estado {
-    + abstract cambiarEstado(temp: float): int
+    + abstract cambiarEstado(temp: float): CambioEstado
     + producir()
 }
 class Normal extends Estado{
-    + cambiarEstado(temp: float): int
+    + cambiarEstado(temp: float): CambioEstado
     - cambiarACriticidad(): boolean
 }
 class Critico extends Estado{
-    + cambiarEstado(temp: float): int
+    + cambiarEstado(temp: float): CambioEstado
     + producir()
     - cambiarACritico(): boolean
     - cambiarANormal(): boolean
 }
 class Apagado extends Estado{
-    + cambiarEstado(temp: float): int
+    + cambiarEstado(temp: float): CambioEstado
     + producir()
     - cambiarANormal(): boolean
 }
 
-enum CambioEstado
+enum CambioEstado {
+    NO_CAMBIO
+    NORMAL
+    CRITICO
+    APAGADO
+}
 
 class InfoEstadoReactor {
-    - cantNormal: int
-    - cantCritico: int
-    - cantApagado: int
+    - mapaInfo: Map
+    + constructor()
 }
 
 'Relaciones
@@ -96,18 +111,21 @@ Reactor o.r. MecanismoDeControl
 Reactor o.l. NotificadorEstadoReactor
 Reactor o.. Estado
 Reactor o.. InfoEstadoReactor
+Reactor o.. Operador
 
-NotificadorEstadoReactor o.. Suscriptor
+NotificadorEstadoReactor o.u. Suscriptor
 MecanismoBarrasDeControl o.. Barra
 
 MecanismoBarrasDeControl o.r[hidden]. MecanismoDeControl
+Suscriptor o.u[hidden]. Operador
 
 Note right of Reactor::producir 
     estado.producir()
 end Note
 Note right of Reactor::cambiarEstado 
-    estado.cambiarEstado()
-
+    x = estado.cambiarEstado()
+    agregar x al mapa
+    notificador.notificar(x)
 end Note
 Note left of Sensor::notificar 
     suscriptor.cambiarEstado(getTemperatura())
@@ -116,8 +134,14 @@ Note left of Sensor::setTemperatura
     this.temperatura = temp
     this.notificar()
 end Note
-Note left of Normal::cambiarEstado 
-    ... estadoCritico++
+Note left of InfoEstadoReactor::constructor 
+    inicializar el mapa
+end Note
+Note left of NotificadorEstadoReactor::notificar 
+    if(x == CambioEstado.CRITICO) ...
+end Note
+Note left of Operador::actualizar 
+    mecanismo.enfriar()
 end Note
 
 @enduml
