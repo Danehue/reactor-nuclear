@@ -29,7 +29,7 @@ class Critico extends Estado_1.default {
         return temp < 330;
     }
     cambiarAApagado(temp) {
-        return temp > 400;
+        return temp >= 400;
     }
 }
 exports.default = Critico;

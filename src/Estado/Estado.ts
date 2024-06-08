@@ -3,7 +3,7 @@ import EstadoSetter from "./EstadoSetter";
 
 export default abstract class Estado{
     protected _m: number = 12;
-    protected _b: number = -3261;
+    protected _b: number = -3260;
     
     public get m(): number {
         return this._m;

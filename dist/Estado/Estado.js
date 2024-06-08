@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Estado {
     _m = 12;
-    _b = -3261;
+    _b = -3260;
     get m() {
         return this._m;
     }

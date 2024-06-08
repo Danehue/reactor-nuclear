@@ -30,7 +30,7 @@ export default class Critico extends Estado {
         return temp < 330;
     }
     private cambiarAApagado(temp: number): boolean {
-        return temp > 400;
+        return temp >= 400;
     }
 
 }
