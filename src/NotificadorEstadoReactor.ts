@@ -11,7 +11,7 @@ export class NotificadorEstadoReactor {
         this.jefes = [];
     }
 
-    suscribir(s: Suscriptor): void {
+    suscribir(s: Operador: void {
         this.suscriptores.push(s);
     }
 
@@ -19,7 +19,7 @@ export class NotificadorEstadoReactor {
         this.jefes.push(j);
     }
 
-    desuscribir(s: Suscriptor): void {
+    desuscribir(s: Operador): void {
         this.suscriptores = this.suscriptores.filter(subscriber => subscriber !== s);
     }
 
