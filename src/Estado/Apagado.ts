@@ -5,10 +5,10 @@ import Normal from "./Normal";
 
 export default class Apagado extends Estado{
     
-    public cambiarEstado(temp: number, e: EstadoSetter): CambioEstado {
+    public cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado {
         if (this.cambiarANormal(temp)) {
             let nuevoEstado: Estado = new Normal();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado.NORMAL;
         }
         return CambioEstado.No_CAMBIO;

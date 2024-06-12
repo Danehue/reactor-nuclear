@@ -17,7 +17,7 @@ class Reactor {
     + iniciar()
     + producir()
     + detener()
-    + cambiarEstado(temp: float, e: EstadoSetter)
+    + cambiarEstado(temp: float)
 }
 
 class Sensor {
@@ -130,7 +130,7 @@ Note right of Reactor::producir
     estado.producir()
 end Note
 Note right of Reactor::cambiarEstado 
-    x = estado.cambiarEstado()
+    x = estado.cambiarEstado(temp,this)
     agregar x al mapa
     notificador.notificar(x)
 end Note

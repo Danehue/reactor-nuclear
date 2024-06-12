@@ -9,15 +9,15 @@ const Estado_1 = __importDefault(require("./Estado"));
 const Normal_1 = __importDefault(require("./Normal"));
 class Critico extends Estado_1.default {
     prcReduccion = 0.2;
-    cambiarEstado(temp, e) {
+    cambiarEstado(temp, reactor) {
         if (this.cambiarANormal(temp)) {
             let nuevoEstado = new Normal_1.default();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado_1.CambioEstado.NORMAL;
         }
         if (this.cambiarAApagado(temp)) {
             let nuevoEstado = new Apagado_1.default();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado_1.CambioEstado.APAGADO;
         }
         return CambioEstado_1.CambioEstado.No_CAMBIO;

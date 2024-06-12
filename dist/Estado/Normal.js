@@ -8,15 +8,15 @@ const CambioEstado_1 = require("./CambioEstado");
 const Critico_1 = __importDefault(require("./Critico"));
 const Estado_1 = __importDefault(require("./Estado"));
 class Normal extends Estado_1.default {
-    cambiarEstado(temp, e) {
+    cambiarEstado(temp, reactor) {
         if (this.cambiarACritico(temp)) {
             let nuevoEstado = new Critico_1.default();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado_1.CambioEstado.CRITICO;
         }
         if (this.cambiarAApagado(temp)) {
             let nuevoEstado = new Apagado_1.default();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado_1.CambioEstado.APAGADO;
         }
         return CambioEstado_1.CambioEstado.No_CAMBIO;

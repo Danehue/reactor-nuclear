@@ -1,7 +1,9 @@
+import Apagado from "../src/Estado/Apagado";
 import { CambioEstado } from "../src/Estado/CambioEstado";
+import Critico from "../src/Estado/Critico";
 import Estado from "../src/Estado/Estado";
 import Normal from "../src/Estado/Normal";
-import { mockEstadoSetter } from './mocks/MockEstadoSetter';
+import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
 
 describe('Normal', () => {
   let instance: Estado;
@@ -14,14 +16,29 @@ describe('Normal', () => {
   it('instance tiene que ser una instancia de Estado', () => {
     expect(instance instanceof Estado).toBeTruthy();
   });
-  it('cambiarEstado() tiene que devolver CambioEstado.CRITICO', () => {
-    expect(instance.cambiarEstado(330, mockEstadoSetter)).toBe(CambioEstado.CRITICO);
-  });
-  it('cambiarEstado() tiene que devolver CambioEstado.APAGADO', () => {
-    expect(instance.cambiarEstado(400, mockEstadoSetter)).toBe(CambioEstado.APAGADO);
-  });
+
   it('cambiarEstado() tiene que devolver CambioEstado.NO_CAMBIO', () => {
-    expect(instance.cambiarEstado(329, mockEstadoSetter)).toBe(CambioEstado.No_CAMBIO);
+    expect(instance.cambiarEstado(329, reactorMock)).toBe(CambioEstado.No_CAMBIO);
+  });
+  it('cambiarEstado() no tiene que llamar a seEstado()', () => {
+    instance.cambiarEstado(329, reactorMock)
+    expect(reactorMock.setEstado).not.toHaveBeenCalled();
+  });
+  
+  it('cambiarEstado() tiene que devolver CambioEstado.CRITICO', () => {
+    expect(instance.cambiarEstado(330, reactorMock)).toBe(CambioEstado.CRITICO);
+  });
+  it('cambiarEstado() tiene que llamar a seEstado() con un estado Critico', () => {
+    instance.cambiarEstado(330, reactorMock)
+    expect(reactorMock.setEstado).toHaveBeenLastCalledWith(new Critico);
+  });
+
+  it('cambiarEstado() tiene que devolver CambioEstado.APAGADO', () => {
+    expect(instance.cambiarEstado(400, reactorMock)).toBe(CambioEstado.APAGADO);
+  });
+  it('cambiarEstado() tiene que llamar a seEstado() con un estado Apagado', () => {
+    instance.cambiarEstado(400, reactorMock)
+    expect(reactorMock.setEstado).toHaveBeenLastCalledWith(new Apagado);
   });
 
 
@@ -51,5 +68,4 @@ describe('Normal', () => {
   });
 
 
-  
 });

@@ -8,15 +8,15 @@ export default class Critico extends Estado {
 
     private prcReduccion: number = 0.2;
     
-    public cambiarEstado(temp: number, e: EstadoSetter): CambioEstado {
+    public cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado {
         if (this.cambiarANormal(temp)) {
             let nuevoEstado: Estado = new Normal();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado.NORMAL;
         }
         if (this.cambiarAApagado(temp)) {
             let nuevoEstado: Estado = new Apagado();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado.APAGADO;
         }
         return CambioEstado.No_CAMBIO;

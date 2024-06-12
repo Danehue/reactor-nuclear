@@ -7,10 +7,10 @@ const CambioEstado_1 = require("./CambioEstado");
 const Estado_1 = __importDefault(require("./Estado"));
 const Normal_1 = __importDefault(require("./Normal"));
 class Apagado extends Estado_1.default {
-    cambiarEstado(temp, e) {
+    cambiarEstado(temp, reactor) {
         if (this.cambiarANormal(temp)) {
             let nuevoEstado = new Normal_1.default();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado_1.CambioEstado.NORMAL;
         }
         return CambioEstado_1.CambioEstado.No_CAMBIO;

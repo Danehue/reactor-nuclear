@@ -12,7 +12,7 @@ export default abstract class Estado{
         return this._b;
     }
 
-    public abstract cambiarEstado(temp: number, e: EstadoSetter): CambioEstado;
+    public abstract cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado;
     
     public producir(temp: number): number {
         // y = 12x - 3261

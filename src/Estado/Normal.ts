@@ -6,15 +6,15 @@ import EstadoSetter from "./EstadoSetter";
 
 export default class Normal extends Estado {
     
-    public cambiarEstado(temp: number, e: EstadoSetter): CambioEstado {
+    public cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado {
         if (this.cambiarACritico(temp)) {
             let nuevoEstado: Estado = new Critico();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado.CRITICO;
         }
         if (this.cambiarAApagado(temp)) {
             let nuevoEstado: Estado = new Apagado();
-            e.setEstado(nuevoEstado);
+            reactor.setEstado(nuevoEstado);
             return CambioEstado.APAGADO;
         }
         return CambioEstado.No_CAMBIO;

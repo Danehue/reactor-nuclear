@@ -1,7 +1,9 @@
 import { CambioEstado } from "../src/Estado/CambioEstado";
 import Estado from "../src/Estado/Estado";
 import Critico from "../src/Estado/Critico";
-import { mockEstadoSetter } from './mocks/MockEstadoSetter';
+import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
+import Apagado from "../src/Estado/Apagado";
+import Normal from "../src/Estado/Normal";
 
 describe('Critico', () => {
   let instance: Estado;
@@ -15,16 +17,32 @@ describe('Critico', () => {
   });
 
   it('cambiarEstado() tiene que devolver CambioEstado.No_CAMBIO', () => {
-    expect(instance.cambiarEstado(330, mockEstadoSetter)).toBe(CambioEstado.No_CAMBIO);
+    expect(instance.cambiarEstado(330, reactorMock)).toBe(CambioEstado.No_CAMBIO);
+  });
+  it('cambiarEstado() no tiene que llamar a seEstado()', () => {
+    instance.cambiarEstado(330, reactorMock)
+    expect(reactorMock.setEstado).not.toHaveBeenCalled();
   });
 
   it('cambiarEstado() tiene que devolver CambioEstado.APAGADO', () => {
-    expect(instance.cambiarEstado(400, mockEstadoSetter)).toBe(CambioEstado.APAGADO);
+    expect(instance.cambiarEstado(400, reactorMock)).toBe(CambioEstado.APAGADO);
+  });
+  it('cambiarEstado() tiene que llamar a seEstado() con un estado Apagado', () => {
+    instance.cambiarEstado(400, reactorMock)
+    expect(reactorMock.setEstado).toHaveBeenLastCalledWith(new Apagado);
   });
 
   it('cambiarEstado() tiene que devolver CambioEstado.NORMAL', () => {
-    expect(instance.cambiarEstado(329, mockEstadoSetter)).toBe(CambioEstado.NORMAL);
+    expect(instance.cambiarEstado(329, reactorMock)).toBe(CambioEstado.NORMAL);
   });
+  it('cambiarEstado() tiene que llamar a seEstado() con un estado Normal', () => {
+    instance.cambiarEstado(329, reactorMock)
+    expect(reactorMock.setEstado).toHaveBeenLastCalledWith(new Normal);
+  });
+  
+
+
+
 
   it('cambiarANormal() tiene que devolver true', () => {
     const cambiarANormal = (instance as any).cambiarANormal;
