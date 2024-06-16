@@ -1,5 +1,7 @@
 @startuml
 
+skinparam lineType ortho
+
 class CentralNuclear {
     - reactor: Reactor
 }
@@ -32,13 +34,13 @@ class Sensor {
 
 
 interface MecanismoDeControl {
-    + enfriar()
+    + enfriar(r: Reactor)
 }
 
 class MecanismoBarrasDeControl implements MecanismoDeControl {
     - barras: Barra[]
     - cantUtilizada: int
-    + enfriar()
+    + enfriar(r: Reactor)
 }
 class Barra {
     - vidaUtil: int
@@ -54,7 +56,7 @@ class NotificadorEstadoReactor {
     + suscribir(j: Jefe)
     + desuscribir(s: Suscriptor)
     + desuscribir(j: Jefe)
-    + notificar(x: CambioEstado)
+    + notificar(r: Reactor, x: CambioEstado)
 }
 
 interface Suscriptor {
