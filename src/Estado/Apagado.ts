@@ -6,7 +6,7 @@ import Normal from "./Normal";
 export default class Apagado extends Estado{
     
     public cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado {
-        if (this.cambiarANormal(temp)) {
+        if (this.esCambioNormal(temp)) {
             let nuevoEstado: Estado = new Normal();
             reactor.setEstado(nuevoEstado);
             return CambioEstado.NORMAL;
@@ -18,7 +18,7 @@ export default class Apagado extends Estado{
         return 0;
     }
 
-    private cambiarANormal(temp: number): boolean {
+    private esCambioNormal(temp: number): boolean {
         return temp < 330;
     }
 }

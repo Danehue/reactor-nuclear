@@ -9,12 +9,12 @@ export default class Critico extends Estado {
     private prcReduccion: number = 0.2;
     
     public cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado {
-        if (this.cambiarANormal(temp)) {
+        if (this.esCambioNormal(temp)) {
             let nuevoEstado: Estado = new Normal();
             reactor.setEstado(nuevoEstado);
             return CambioEstado.NORMAL;
         }
-        if (this.cambiarAApagado(temp)) {
+        if (this.esCambioApagado(temp)) {
             let nuevoEstado: Estado = new Apagado();
             reactor.setEstado(nuevoEstado);
             return CambioEstado.APAGADO;
@@ -26,10 +26,10 @@ export default class Critico extends Estado {
         return super.producir(temp) * this.prcReduccion;
     }
 
-    private cambiarANormal(temp: number): boolean {
+    private esCambioNormal(temp: number): boolean {
         return temp < 330;
     }
-    private cambiarAApagado(temp: number): boolean {
+    private esCambioApagado(temp: number): boolean {
         return temp >= 400;
     }
 

@@ -42,20 +42,20 @@ describe('Normal', () => {
   });
 
 
-  it('cambiarACritico() tiene que devolver true', () => {
-    const cambiarACritico = (instance as any).cambiarACritico;
+  it('esCambioCritico() tiene que devolver true', () => {
+    const cambiarACritico = (instance as any).esCambioCritico;
     expect(cambiarACritico(330)).toBeTruthy();
   });
-  it('cambiarAApagado() tiene que devolver true', () => {
-    const cambiarAApagado = (instance as any).cambiarAApagado;
+  it('esCambioApagado() tiene que devolver true', () => {
+    const cambiarAApagado = (instance as any).esCambioApagado;
     expect(cambiarAApagado(400)).toBeTruthy();
   });
-  it('cambiarACritico() tiene que devolver false', () => {
-    const cambiarACritico = (instance as any).cambiarACritico;
+  it('esCambioCritico() tiene que devolver false', () => {
+    const cambiarACritico = (instance as any).esCambioCritico;
     expect(cambiarACritico(329)).toBeFalsy();
   });
-  it('cambiarAApagado() tiene que devolver false', () => {
-    const cambiarAApagado = (instance as any).cambiarAApagado;
+  it('esCambioApagado() tiene que devolver false', () => {
+    const cambiarAApagado = (instance as any).esCambioApagado;
     expect(cambiarAApagado(329)).toBeFalsy();
   });
 

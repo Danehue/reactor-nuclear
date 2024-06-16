@@ -4,7 +4,7 @@ import Apagado from "../src/Estado/Apagado";
 import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
 import Normal from "../src/Estado/Normal";
 
-describe('Critico', () => {
+describe('Apagado', () => {
   let instance: Estado;
 
   beforeEach(() => {
@@ -41,12 +41,12 @@ describe('Critico', () => {
 
   
 
-  it('cambiarANormal() tiene que devolver true', () => {
-    const cambiarANormal = (instance as any).cambiarANormal;
+  it('esCambioNormal() tiene que devolver true', () => {
+    const cambiarANormal = (instance as any).esCambioNormal;
     expect(cambiarANormal(329)).toBeTruthy();
   });
-  it('cambiarANormal() tiene que devolver false', () => {
-    const cambiarANormal = (instance as any).cambiarANormal;
+  it('esCambioNormal() tiene que devolver false', () => {
+    const cambiarANormal = (instance as any).esCambioNormal;
     expect(cambiarANormal(330)).toBeFalsy();
   });
 

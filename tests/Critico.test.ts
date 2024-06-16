@@ -1,7 +1,7 @@
 import { CambioEstado } from "../src/Estado/CambioEstado";
 import Estado from "../src/Estado/Estado";
-import Critico from "../src/Estado/Critico";
 import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
+import Critico from "../src/Estado/Critico";
 import Apagado from "../src/Estado/Apagado";
 import Normal from "../src/Estado/Normal";
 
@@ -44,20 +44,20 @@ describe('Critico', () => {
 
 
 
-  it('cambiarANormal() tiene que devolver true', () => {
-    const cambiarANormal = (instance as any).cambiarANormal;
+  it('esCambioNormal() tiene que devolver true', () => {
+    const cambiarANormal = (instance as any).esCambioNormal;
     expect(cambiarANormal(329)).toBeTruthy();
   });
-  it('cambiarAApagado() tiene que devolver true', () => {
-    const cambiarAApagado = (instance as any).cambiarAApagado;
+  it('esCambioApagado() tiene que devolver true', () => {
+    const cambiarAApagado = (instance as any).esCambioApagado;
     expect(cambiarAApagado(400)).toBeTruthy();
   });
-  it('cambiarANormal() tiene que devolver false', () => {
-    const cambiarANormal = (instance as any).cambiarANormal;
+  it('esCambioNormal() tiene que devolver false', () => {
+    const cambiarANormal = (instance as any).esCambioNormal;
     expect(cambiarANormal(330)).toBeFalsy();
   });
-  it('cambiarAApagado() tiene que devolver false', () => {
-    const cambiarAApagado = (instance as any).cambiarAApagado;
+  it('esCambioApagado() tiene que devolver false', () => {
+    const cambiarAApagado = (instance as any).esCambioApagado;
     expect(cambiarAApagado(399)).toBeFalsy();
   });
 
