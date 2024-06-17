@@ -1,5 +1,6 @@
 import Barra from "./barra";
 import MecanismoDeControl from "./mecanismo-de-control";
+import Reactor from "./reactor";
 
 export default class MecanismoBarraDeControl implements MecanismoDeControl{
 
@@ -25,20 +26,22 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
 
     public enfriar(reactor: Reactor) {
         
-        // TODO Hablar con Nico para que lo haga así.
-        const temperatura = reactor.obtenerTemperatura();
-        
-        if (temperatura <= 330) {
-            console.log("El reactor está en condiciones normales. No es necesario enfriar.");
-            return;
-        }
-
         let reduccionTotal = 0;
+        let tempReactor = reactor.obtenerTemperatura();
+
         for (const barra of this.barras) {
             const porcentajeReduccion = barra.getPorcentajeReduccion();
             reduccionTotal += porcentajeReduccion;
             this._cantUtilizada++;
             barra.reducirVidaUtil();
+            const tempFinal = tempReactor * (1 - porcentajeReduccion);
+
+            reactor.setTemperatura(tempFinal);
+
+            tempReactor = reactor.getTemperatura()
+            if(tempReactor < 330){
+                break;
+            }
         }
 
         console.log(`Se han utilizado ${this.cantUtilizada} barras para reducir la energía térmica.`);

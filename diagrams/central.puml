@@ -6,7 +6,7 @@ class CentralNuclear {
     - reactor: Reactor
 }
 
-class Reactor {
+class Reactor implements EstadoSetter{
     - operadores: Operador[]
     - combustible: float
     - capacidad: int
@@ -19,7 +19,12 @@ class Reactor {
     + iniciar()
     + producir()
     + detener()
-    + cambiarEstado(temp: float)
+    + cambiarEstado(temp: float, this: EstadoSetter)
+    + obtenerTemperatura()
+}
+
+interface EstadoSetter {
+    + setEstado(e: Estado)
 }
 
 class Sensor {
@@ -52,21 +57,21 @@ class NotificadorEstadoReactor {
     - suscriptores: Suscriptor[]
     - jefe: Suscriptor
 
-    + suscribir(s: Suscriptor)
+    + suscribir(s: Operador)
     + suscribir(j: Jefe)
-    + desuscribir(s: Suscriptor)
+    + desuscribir(s: Operador)
     + desuscribir(j: Jefe)
     + notificar(r: Reactor, x: CambioEstado)
 }
 
 interface Suscriptor {
-    + actualizar()
+    + actualizar(r: Reactor)
 }
 
 class Operador implements Suscriptor {
     - mecanismo: MecanismoDeControl
     + constructor(m: MecanismoDeControl)
-    + actualizar()
+    + actualizar(r: Reactor)
 }
 
 class Jefe implements Suscriptor{
@@ -126,7 +131,7 @@ Note right of Reactor::producir
     estado.producir()
 end Note
 Note right of Reactor::cambiarEstado 
-    x = estado.cambiarEstado()
+    x = estado.cambiarEstado(temp, this)
     agregar x al mapa
     notificador.notificar(x)
 end Note
@@ -142,9 +147,10 @@ Note left of InfoEstadoReactor::constructor
 end Note
 Note left of NotificadorEstadoReactor::notificar 
     if(x == CambioEstado.CRITICO) ...
+    if(x == CambioEstado.APAGADO) ...
 end Note
 Note left of Operador::actualizar 
-    mecanismo.enfriar()
+    mecanismo.enfriar(r: Reactor)
 end Note
 
 @enduml

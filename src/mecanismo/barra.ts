@@ -9,19 +9,17 @@ export default class Barra{
     public get vidaUtil(): number {
         return this._vidaUtil;
     }
+    
     public set vidaUtil(value: number) {
         this._vidaUtil = value;
     }
 
     public getPorcentajeReduccion(){
-        return (this._vidaUtil / 3600) * 100;
+        return parseFloat(((this._vidaUtil / 3600) * 100).toFixed(2));
     }
 
     public reducirVidaUtil(): void {
-        this.vidaUtil -= 1;
-        if (this.vidaUtil < 0) {
-            this.vidaUtil = 0;
-        }
+        this.vidaUtil = 0;
     }
 
 }
