@@ -1,0 +1,24 @@
+@startuml
+participant Sistema
+participant Operador
+participant Jefe
+
+note left of Sistema
+    CambioEstado
+    NORMAL
+    CRITICO
+    APAGADO
+    NOCAMBIO
+end note
+
+alt x == CambioEstado.CRITICO
+    loop para cada Operador
+        Sistema -> Operador: notificar(x: CambioEstado.CRITICO)
+        Operador -> Operador: actualizar(r: Reactor)
+    end
+else x == CambioEstado.APAGADO
+    Sistema -> Jefe: notificar(x: CambioEstado.APAGADO)
+    Jefe -> Jefe: actualizar()
+end
+
+@enduml

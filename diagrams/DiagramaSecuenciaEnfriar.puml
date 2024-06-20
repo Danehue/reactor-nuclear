@@ -1,0 +1,45 @@
+@startuml
+actor Operator
+participant MecanismoDeControl
+participant reactor as "Reactor"
+participant barra as "Barra"
+
+Operator -> MecanismoDeControl: enfriar(reactor)
+activate MecanismoDeControl
+
+MecanismoDeControl -> reactor: obtenerTemperatura()
+
+activate reactor
+reactor --> MecanismoDeControl: tempReactor
+deactivate reactor
+
+loop for each barra in MecanismoDeControl.barras
+    MecanismoDeControl -> barra: getPorcentajeReduccion()
+    activate barra
+    barra --> MecanismoDeControl: porcentajeReduccion
+    MecanismoDeControl -> MecanismoDeControl: reduccionTotal += porcentajeReduccion
+    MecanismoDeControl -> MecanismoDeControl: _cantUtilizada++
+    MecanismoDeControl -> barra: reducirVidaUtil()
+    deactivate barra
+
+    MecanismoDeControl -> reactor: setTemperatura(tempReactor * (1 - porcentajeReduccion))
+    activate reactor
+    reactor --> MecanismoDeControl: tempFinal
+    deactivate reactor
+
+    MecanismoDeControl -> reactor: getTemperatura()
+    activate reactor
+    reactor --> MecanismoDeControl: tempReactor
+    deactivate reactor
+
+    alt (tempReactor < 330)
+       rnote over MecanismoDeControl
+        break
+       endrnote
+    end
+
+end loop
+
+MecanismoDeControl -> Operator: Se han utilizado {_cantUtilizada} barras para reducir la energía térmica.
+deactivate MecanismoDeControl
+@enduml

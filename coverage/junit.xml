@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="11" failures="0" errors="0" time="11.992">
+  <testsuite name="NotificadorEstadoReactor" errors="0" failures="0" skipped="0" timestamp="2024-06-20T15:41:43" time="10.299" tests="7">
+    <testcase classname="NotificadorEstadoReactor instance es instancia del Notificador instance es instancia del Notificador" name="NotificadorEstadoReactor instance es instancia del Notificador instance es instancia del Notificador" time="0.02">
+    </testcase>
+    <testcase classname="NotificadorEstadoReactor suscribir un Operador suscribir un Operador" name="NotificadorEstadoReactor suscribir un Operador suscribir un Operador" time="0.014">
+    </testcase>
+    <testcase classname="NotificadorEstadoReactor suscribir y desuscribir un Operador suscribir y desuscribir un Operador" name="NotificadorEstadoReactor suscribir y desuscribir un Operador suscribir y desuscribir un Operador" time="0.009">
+    </testcase>
+    <testcase classname="NotificadorEstadoReactor suscribir un Jefe suscribir un Jefe" name="NotificadorEstadoReactor suscribir un Jefe suscribir un Jefe" time="0.006">
+    </testcase>
+    <testcase classname="NotificadorEstadoReactor desuscribir un Jefe desuscribir un Jefe" name="NotificadorEstadoReactor desuscribir un Jefe desuscribir un Jefe" time="0.007">
+    </testcase>
+    <testcase classname="NotificadorEstadoReactor notificar a los suscriptores en estado CRITICO notificar a los suscriptores en estado CRITICO" name="NotificadorEstadoReactor notificar a los suscriptores en estado CRITICO notificar a los suscriptores en estado CRITICO" time="0.008">
+    </testcase>
+    <testcase classname="NotificadorEstadoReactor notificar al jefe en estado APAGADO notificar al jefe en estado APAGADO" name="NotificadorEstadoReactor notificar al jefe en estado APAGADO notificar al jefe en estado APAGADO" time="0.01">
+    </testcase>
+  </testsuite>
+  <testsuite name="Jefe" errors="0" failures="0" skipped="0" timestamp="2024-06-20T15:41:53" time="0.605" tests="2">
+    <testcase classname="Jefe instance tiene que ser una instancia de Jefe instance tiene que ser una instancia de Jefe" name="Jefe instance tiene que ser una instancia de Jefe instance tiene que ser una instancia de Jefe" time="0.019">
+    </testcase>
+    <testcase classname="Jefe llamada a actualizar llamada a actualizar" name="Jefe llamada a actualizar llamada a actualizar" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="Operador" errors="0" failures="0" skipped="0" timestamp="2024-06-20T15:41:54" time="0.573" tests="2">
+    <testcase classname="Operador Instancia correcta de operador Instancia correcta de operador" name="Operador Instancia correcta de operador Instancia correcta de operador" time="0.008">
+    </testcase>
+    <testcase classname="Operador Llamada a enfriar Llamada a enfriar" name="Operador Llamada a enfriar Llamada a enfriar" time="0.007">
+    </testcase>
+  </testsuite>
+</testsuites>

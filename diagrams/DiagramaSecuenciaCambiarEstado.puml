@@ -1,0 +1,42 @@
+@startuml
+actor Reactor
+participant Normal
+participant Critico
+participant Apagado
+
+Reactor -> Normal : cambiarEstado(temp, reactor)
+activate Normal
+
+alt esCambioCritico(temp)
+    Normal -> Normal : esCambioCritico(temp)
+    activate Normal
+    Normal --> Normal : true
+    deactivate Normal
+
+    Normal -> Critico : new Critico()
+    activate Critico
+    Normal -> Reactor : setEstado(Critico)
+    deactivate Critico
+
+    Normal -> Reactor : CambioEstado.CRITICO
+    deactivate Normal
+
+else esCambioApagado(temp)
+    Normal -> Normal : esCambioApagado(temp)
+    activate Normal
+    Normal --> Normal : true
+    deactivate Normal
+
+    Normal -> Apagado : new Apagado()
+    activate Apagado
+    Normal -> Reactor : setEstado(Apagado)
+    deactivate Apagado
+
+    Normal -> Reactor : CambioEstado.APAGADO
+    deactivate Normal
+
+else
+    Normal -> Reactor : CambioEstado.NO_CAMBIO
+    deactivate Normal
+end
+@enduml
