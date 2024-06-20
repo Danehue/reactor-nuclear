@@ -1,4 +1,7 @@
-@startuml
+@startuml title "Reactor Nuclear"
+
+
+skinparam lineType ortho
 
 skinparam lineType ortho
 
