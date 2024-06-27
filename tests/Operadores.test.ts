@@ -1,6 +1,6 @@
 import { Operador } from '../src/notificador/Operadores';
-import { MecanismoDeControl } from '../src/notificador/MecanismoDeControl';
-import { Reactor } from '../src/notificador/Reactor';
+import  MecanismoDeControl  from '../src/mecanismo/mecanismo-de-control';
+import  Reactor  from '../src/reactor/Reactor';
 
 describe('Operador', () => {
     

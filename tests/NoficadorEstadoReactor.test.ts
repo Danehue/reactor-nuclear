@@ -1,9 +1,9 @@
 import { NotificadorEstadoReactor } from '../src/notificador/notificadorEstadoReactor';
 import { Operador } from '../src/notificador/Operadores';
 import { Jefe } from '../src/notificador/Jefe';
-import { CambioEstado } from '../src/notificador/CambioEstado';
-import { Reactor } from '../src/notificador/Reactor';
-import { MockMecanismoDeControl } from './mooks/MockMecanismo';
+import { CambioEstado } from "../src/estado/CambioEstado";
+import  Reactor  from '../src/reactor/Reactor';
+import { MockMecanismoDeControl } from './mocks/MockMecanismo';
 
 describe('NotificadorEstadoReactor', () => {
     let instance: NotificadorEstadoReactor;

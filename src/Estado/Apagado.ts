@@ -5,13 +5,13 @@ import Normal from "./Normal";
 
 export default class Apagado extends Estado{
     
-    public cambiarEstado(temp: number, reactor: EstadoSetter): CambioEstado {
+    public cambiarEstado(reactor: EstadoSetter, temp: number): CambioEstado {
         if (this.esCambioNormal(temp)) {
             let nuevoEstado: Estado = new Normal();
             reactor.setEstado(nuevoEstado);
             return CambioEstado.NORMAL;
         }
-        return CambioEstado.No_CAMBIO;
+        return CambioEstado.NO_CAMBIO;
     }
 
     public producir(temp: number): number {

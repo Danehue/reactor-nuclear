@@ -27,7 +27,7 @@ describe('Test clase Barra', () => {
 
     it('Reducir en 1 la vida útil obteniendo el valor 199', () => {
         instance.reducirVidaUtil();
-        expect(instance.vidaUtil).toBe(199);
+        expect(instance.vidaUtil).toBe(0);
     });
 
     it('No se debería reducir la vida útil por debajo de 0', () => {

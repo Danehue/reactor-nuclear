@@ -1,1 +1,1 @@
-{"version":3,"file":"CambioEstado.js","sourceRoot":"","sources":["../../src/Estado/CambioEstado.ts"],"names":[],"mappings":";;;AAAA,IAAY,YAKX;AALD,WAAY,YAAY;IACpB,yDAAS,CAAA;IACT,mDAAM,CAAA;IACN,qDAAO,CAAA;IACP,qDAAO,CAAA;AACX,CAAC,EALW,YAAY,GAAZ,oBAAY,KAAZ,oBAAY,QAKvB"}
+{"version":3,"file":"CambioEstado.js","sourceRoot":"","sources":["../../src/estado/CambioEstado.ts"],"names":[],"mappings":";;;AAAA,IAAY,YAKX;AALD,WAAY,YAAY;IACpB,yDAAS,CAAA;IACT,mDAAM,CAAA;IACN,qDAAO,CAAA;IACP,qDAAO,CAAA;AACX,CAAC,EALW,YAAY,GAAZ,oBAAY,KAAZ,oBAAY,QAKvB"}
