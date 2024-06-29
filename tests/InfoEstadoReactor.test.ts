@@ -5,7 +5,7 @@ describe('Test clase InfoEstadoReactor', () => {
     let infoEstadoReactor: InfoEstadoReactor;
 
     beforeEach(() => {
-        infoEstadoReactor = new InfoEstadoReactor(new Map<number, number>());
+        infoEstadoReactor = new InfoEstadoReactor();
     });
 
     it('Inicialización correcta del mapa de información', () => {

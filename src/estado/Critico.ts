@@ -26,10 +26,10 @@ export default class Critico extends Estado {
         return super.producir(temp) * this.prcReduccion;
     }
 
-    private esCambioNormal(temp: number): boolean {
+    public esCambioNormal(temp: number): boolean {
         return temp < 330;
     }
-    private esCambioApagado(temp: number): boolean {
+    public esCambioApagado(temp: number): boolean {
         return temp >= 400;
     }
 

@@ -19,12 +19,12 @@ export default class Normal extends Estado {
         }
         return CambioEstado.NO_CAMBIO;
     }
-    
-    private esCambioCritico(temp: number): boolean {
+
+    public esCambioCritico(temp: number): boolean {
         return temp >= 330 && temp < 400;
     }
 
-    private esCambioApagado(temp: number): boolean {
+    public esCambioApagado(temp: number): boolean {
         return temp >= 400;
     }
 }

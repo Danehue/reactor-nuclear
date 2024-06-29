@@ -1,6 +1,8 @@
+import Apagado from "../estado/Apagado";
 import { CambioEstado } from "../estado/CambioEstado";
 import Estado from "../estado/Estado";
 import EstadoSetter from "../estado/EstadoSetter";
+import Normal from "../estado/Normal";
 import MecanismoBarraDeControl from "../mecanismo/MecanismoBarraControl";
 import MecanismoDeControl from "../mecanismo/MecanismoDeControl";
 import { NotificadorEstadoReactor } from "../notificador/NotificadorEstadoReactor";
@@ -13,27 +15,33 @@ export default class Reactor implements EstadoSetter{
     private capacidad: number;
     private estado: Estado;
 
-    private operadores: Operador[];
-    private sensor: Sensor;
+    private _sensor: Sensor;
     private mecanismoDeControl: MecanismoDeControl;
     private notificador: NotificadorEstadoReactor;
-    private info: InfoEstadoReactor;
+    private _info: InfoEstadoReactor;
     
-    constructor(capacidad: number, e: Estado) {
-        this.estado = e;
-        this.capacidad = capacidad;
+    
+    constructor() {
+        this.notificador = new NotificadorEstadoReactor();
+        this.estado = new Apagado();
+        this.capacidad = 700;
+        this._sensor = new Sensor(this);
+        this.mecanismoDeControl = new MecanismoBarraDeControl();
+        this._info = new InfoEstadoReactor();
     }
 
     iniciar() {
-        throw new Error("Method not implemented.");
+        if (this._sensor.temperatura < 330) {
+            this.setEstado(new Normal());
+        }
     }
 
-    producir() {
-        this.estado.producir(this.sensor.temperatura);
+    producir(horas: number): number {
+        return (this.estado.producir(this._sensor.temperatura)) * horas;
     }
 
     detener() {
-        throw new Error("Method not implemented.");
+        this.setEstado(new Apagado());
     }
 
     cambiarEstado(temp: number) {
@@ -42,18 +50,19 @@ export default class Reactor implements EstadoSetter{
         this.notificador.notificar(this, tipoCambio);
     }
 
-    obtenerTemperatura(): number {
-        return this.sensor.temperatura;
-    }
-
     setEstado(e: Estado): void {
         this.estado = e;
     }
     
-    getTemperatura(): number {
-        return this.sensor.temperatura;
+    obtenerTemperatura(): number {
+        return this._sensor.temperatura;
     }
+
     setTemperatura(temp: number) {
-        this.sensor.temperatura = temp;
+        this._sensor.temperatura = temp;
+    }
+
+    public get info(): InfoEstadoReactor {
+        return this._info;
     }
 }

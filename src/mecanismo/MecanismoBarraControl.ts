@@ -7,9 +7,9 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
     private _barras: Barra[];
     private _cantUtilizada: number;
 
-    constructor(cantUtilizada: number, barras: Barra[]){
-        this._barras = barras;
-        this._cantUtilizada = cantUtilizada;
+    constructor(){
+        this._barras = [];
+        this._cantUtilizada = 0;
     }
 
     public get barras(): Barra[] {
@@ -20,8 +20,8 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
         return this._cantUtilizada;
     }
 
-    public agregarBarra(barra: Barra): void {
-        this.barras.push(barra);
+    public agregarBarras(barras: Barra[]): void {
+        barras.forEach(barra => this.barras.push(barra));
     }
 
     public enfriar(reactor: Reactor) {
@@ -39,11 +39,11 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
             reduccionTotal += porcentajeReduccion;
             this._cantUtilizada++;
             barra.reducirVidaUtil();
-            const tempFinal = tempReactor * (1 - porcentajeReduccion);
+            const tempFinal = tempReactor * (1 - porcentajeReduccion / 100);
 
             reactor.setTemperatura(tempFinal);
 
-            tempReactor = reactor.getTemperatura()
+            tempReactor = reactor.obtenerTemperatura();
 
             // Ver con los chicos  
             if(tempReactor <= 330){
@@ -51,8 +51,7 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
             }
             
         }
-
-        console.log(`Se han utilizado ${this.cantUtilizada} barras para reducir la energía térmica.`);
+        return this.cantUtilizada;
     }
 
 }

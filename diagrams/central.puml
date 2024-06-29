@@ -17,7 +17,7 @@ class Reactor implements EstadoSetter{
     - info: InfoEstadoReactor
     + Constructor(capacidad: int, e: Estado)
     + iniciar()
-    + producir()
+    + producir(horas: number)
     + detener()
     + cambiarEstado(temp: float, this: EstadoSetter)
     + obtenerTemperatura()
@@ -83,10 +83,6 @@ abstract Estado {
     + producir()
 }
 
-interface EstadoSetter {
-    + setEstado(e: Estado)
-}
-
 class Normal extends Estado{
     + cambiarEstado(temp: float): CambioEstado
     - cambiarACriticidad(): boolean
@@ -125,7 +121,6 @@ Reactor o.l. NotificadorEstadoReactor
 Reactor o.. Estado
 Reactor o.. InfoEstadoReactor
 Reactor o.. Operador
-Reactor ..|> EstadoSetter
 
 NotificadorEstadoReactor o.u. Suscriptor
 MecanismoBarrasDeControl o.. Barra

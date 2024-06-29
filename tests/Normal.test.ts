@@ -6,7 +6,7 @@ import Normal from "../src/estado/Normal";
 import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
 
 describe('Normal', () => {
-  let instance: Estado;
+  let instance: Normal;
 
   beforeEach(() => {
     instance = new Normal();
@@ -18,7 +18,7 @@ describe('Normal', () => {
   });
 
   it('cambiarEstado() tiene que devolver CambioEstado.NO_CAMBIO', () => {
-    expect(instance.cambiarEstado(reactorMock, 329)).toBe(CambioEstado.NO_CAMBIO);
+    expect(instance.cambiarEstado(reactorMock, 329)).toEqual(CambioEstado.NO_CAMBIO);
   });
   it('cambiarEstado() no tiene que llamar a seEstado()', () => {
     instance.cambiarEstado(reactorMock, 329)
@@ -26,7 +26,7 @@ describe('Normal', () => {
   });
   
   it('cambiarEstado() tiene que devolver CambioEstado.CRITICO', () => {
-    expect(instance.cambiarEstado(reactorMock, 330)).toBe(CambioEstado.CRITICO);
+    expect(instance.cambiarEstado(reactorMock, 330)).toEqual(CambioEstado.CRITICO);
   });
   it('cambiarEstado() tiene que llamar a seEstado() con un estado Critico', () => {
     instance.cambiarEstado(reactorMock, 330)
@@ -34,7 +34,7 @@ describe('Normal', () => {
   });
 
   it('cambiarEstado() tiene que devolver CambioEstado.APAGADO', () => {
-    expect(instance.cambiarEstado(reactorMock, 400)).toBe(CambioEstado.APAGADO);
+    expect(instance.cambiarEstado(reactorMock, 400)).toEqual(CambioEstado.APAGADO);
   });
   it('cambiarEstado() tiene que llamar a seEstado() con un estado Apagado', () => {
     instance.cambiarEstado(reactorMock, 400)
@@ -43,20 +43,16 @@ describe('Normal', () => {
 
 
   it('esCambioCritico() tiene que devolver true', () => {
-    const cambiarACritico = (instance as any).esCambioCritico;
-    expect(cambiarACritico(330)).toBeTruthy();
+    expect(instance.esCambioCritico(330)).toBeTruthy();
   });
   it('esCambioApagado() tiene que devolver true', () => {
-    const cambiarAApagado = (instance as any).esCambioApagado;
-    expect(cambiarAApagado(400)).toBeTruthy();
+    expect(instance.esCambioApagado(400)).toBeTruthy();
   });
   it('esCambioCritico() tiene que devolver false', () => {
-    const cambiarACritico = (instance as any).esCambioCritico;
-    expect(cambiarACritico(329)).toBeFalsy();
+    expect(instance.esCambioCritico(329)).toBeFalsy();
   });
   it('esCambioApagado() tiene que devolver false', () => {
-    const cambiarAApagado = (instance as any).esCambioApagado;
-    expect(cambiarAApagado(329)).toBeFalsy();
+    expect(instance.esCambioApagado(329)).toBeFalsy();
   });
 
 

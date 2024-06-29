@@ -19,4 +19,4 @@ class Barra {
     }
 }
 exports.default = Barra;
-//# sourceMappingURL=barra.js.map
+//# sourceMappingURL=Barra.js.map

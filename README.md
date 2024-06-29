@@ -16,7 +16,7 @@ Utilizar y profundizar conocimientos sobre técnicas y herramientas de desarroll
 - <small><strong>Monitoreo de Temperatura:</strong> Permitir conocer la temperatura del reactor en todo momento.</small>
 - <small><strong>Producción de Energía: </strong>Calcular y mostrar la cantidad de energía neta producida (MWe) en todo momento.</small>
 - <small><strong>Gestión de Barras de Control: </strong>Reducir la energía térmica liberada en base al consumo automático de barras de control.</small>
-- <small><strong>Alertas: </strong>Enviar notificaciones a Homero J. S. si la temperatura del reactor supera los 330°C.</small>
+- <small><strong>Alertas: </strong>Enviar notificaciones a los operarios si la temperatura del reactor supera los 330°C y al señor Burns cuando supera los 400°C.</small>
 - <small><strong>Enfriamiento del Reactor: </strong>Activar mecanismos de enfriamiento cuando la temperatura supera los 330°C.</small>
 
 <h3>Requerimientos Adicionales</h3>
@@ -51,21 +51,15 @@ Utilizar y profundizar conocimientos sobre técnicas y herramientas de desarroll
 
 - <small>npm run build</small>
 
-**Ejecución**
-<small>Para ejecutar el programa principal</small>
-
-- <small>npm start</small>
-
 **Pruebas**
 <small>Para ejecutar las pruebas unitarias</small>
 
-- <small>npm test</small>
+- <small>npm run test</small>
 
 ----
 
 **Equipo de Trabajo**
 
 Germán Mendoza <br>
-Pablo  <br>
+Pablo Campaniello <br>
 Braian Mastrogiacomo <br>
-Nicolás Quero

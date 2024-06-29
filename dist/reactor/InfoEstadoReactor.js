@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const CambioEstado_1 = require("../estado/CambioEstado");
 class InfoEstadoReactor {
     mapaInfo;
-    constructor(mapaInfo) {
-        this.mapaInfo = mapaInfo;
+    constructor() {
+        this.mapaInfo = new Map();
         this.mapaInfo.set(CambioEstado_1.CambioEstado.NORMAL, 0);
         this.mapaInfo.set(CambioEstado_1.CambioEstado.CRITICO, 0);
         this.mapaInfo.set(CambioEstado_1.CambioEstado.APAGADO, 0);

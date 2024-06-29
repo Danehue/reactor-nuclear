@@ -3,7 +3,7 @@ import  Reactor  from '../src/reactor/Reactor';
 import * as MOCKS from "./mocks/mocks";
 
 describe('Test clase Operador', () => {
-    const reactorMock = new Reactor(100, MOCKS.estadoNormal as any);
+    const reactorMock = new Reactor();
     let instance: Operador;
 
     beforeEach(() => {

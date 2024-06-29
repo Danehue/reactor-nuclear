@@ -3,8 +3,8 @@ import { CambioEstado } from "../estado/CambioEstado";
 export default class InfoEstadoReactor {
     private mapaInfo: Map<number, number>;
 
-    public constructor(mapaInfo: Map<number, number>) {
-        this.mapaInfo = mapaInfo;
+    public constructor() {
+        this.mapaInfo = new Map<number, number>();
         this.mapaInfo.set(CambioEstado.NORMAL, 0);
         this.mapaInfo.set(CambioEstado.CRITICO, 0);
         this.mapaInfo.set(CambioEstado.APAGADO, 0);
