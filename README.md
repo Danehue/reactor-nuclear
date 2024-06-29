@@ -11,7 +11,7 @@
 Fomentar el trabajo en equipo.
 Utilizar y profundizar conocimientos sobre técnicas y herramientas de desarrollo de software utilizadas en la industria.</small>
 
-<h3>Principales Funcionalidades</h3> (Revisar)
+<h3>Principales Funcionalidades</h3>
 
 - <small><strong>Monitoreo de Temperatura:</strong> Permitir conocer la temperatura del reactor en todo momento.</small>
 - <small><strong>Producción de Energía: </strong>Calcular y mostrar la cantidad de energía neta producida (MWe) en todo momento.</small>
