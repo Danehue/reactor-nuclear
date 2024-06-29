@@ -1,28 +1,23 @@
 import { Operador } from '../src/notificador/Operadores';
-import { MecanismoDeControl } from '../src/notificador/MecanismoDeControl';
-import { Reactor } from '../src/notificador/Reactor';
+import  Reactor  from '../src/reactor/Reactor';
+import * as MOCKS from "./mocks/mocks";
 
-describe('Operador', () => {
-    
-    const mecanismoMock = {
-        enfriar: jest.fn(),
-    } as unknown as MecanismoDeControl; 
-
-    const reactorMock = new Reactor();
+describe('Test clase Operador', () => {
+    const reactorMock = new Reactor(100, MOCKS.estadoNormal as any);
     let instance: Operador;
 
     beforeEach(() => {
-        instance = new Operador(mecanismoMock);
+        instance = new Operador(MOCKS.mecanismo);
     });
 
     it('Instancia correcta de operador', () => {
         expect(instance instanceof Operador).toBeTruthy();
-      });
+    });
 
     it('Llamada a enfriar', () => {
+        const reactorMock = MOCKS.reactor as Reactor;
         instance.actualizar(reactorMock);
-
-        expect(mecanismoMock.enfriar).toHaveBeenCalledWith(reactorMock);
-        expect(mecanismoMock.enfriar).toHaveBeenCalledTimes(1);
+        expect(MOCKS.mecanismo.enfriar).toHaveBeenCalledWith(reactorMock);
+        expect(MOCKS.mecanismo.enfriar).toHaveBeenCalledTimes(1);
     });
 });

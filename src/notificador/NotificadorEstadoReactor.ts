@@ -1,8 +1,9 @@
 import { Suscriptor } from './Suscriptor';
 import { Operador } from './Operadores';
 import { Jefe } from './Jefe';
-import { CambioEstado } from './CambioEstado';
-import { Reactor } from './Reactor';
+import { CambioEstado } from '../Estado/CambioEstado';
+import Reactor from '../reactor/Reactor';
+// import { Reactor } from '../reactor/Reactor';
 
 export class NotificadorEstadoReactor {
     private suscriptores: Suscriptor[];

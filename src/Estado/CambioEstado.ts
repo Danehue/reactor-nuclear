@@ -1,5 +1,5 @@
-export enum CambioEstado{
-    No_CAMBIO,
+export enum CambioEstado {
+    NO_CAMBIO,
     NORMAL,
     CRITICO,
     APAGADO
