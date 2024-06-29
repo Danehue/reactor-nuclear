@@ -1,4 +1,4 @@
-import Barra from "../src/mecanismo/barra";
+import Barra from "../src/mecanismo/Barra";
 
 describe('Test clase Barra', () => {
     let instance: Barra;

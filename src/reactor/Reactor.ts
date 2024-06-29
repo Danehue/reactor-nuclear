@@ -1,7 +1,8 @@
-import { CambioEstado } from "../estado/CambioEstado";
-import Estado from "../estado/Estado";
-import EstadoSetter from "../estado/EstadoSetter";
-import MecanismoDeControl from "../mecanismo/mecanismo-de-control";
+import { CambioEstado } from "../Estado/CambioEstado";
+import Estado from "../Estado/Estado";
+import EstadoSetter from "../Estado/EstadoSetter";
+import MecanismoBarraDeControl from "../mecanismo/MecanismoBarraControl";
+import MecanismoDeControl from "../mecanismo/MecanismoDeControl";
 import { NotificadorEstadoReactor } from "../notificador/NotificadorEstadoReactor";
 import { Operador } from "../notificador/Operadores";
 import InfoEstadoReactor from "./InfoEstadoReactor";
@@ -9,16 +10,18 @@ import Sensor from "./Sensor";
 
 export default class Reactor implements EstadoSetter{
 
-    private operadores: Operador[];
     private capacidad: number;
+    private estado: Estado;
+
+    private operadores: Operador[];
     private sensor: Sensor;
     private mecanismoDeControl: MecanismoDeControl;
     private notificador: NotificadorEstadoReactor;
-    private estado: Estado;
     private info: InfoEstadoReactor;
     
     constructor(capacidad: number, e: Estado) {
         this.estado = e;
+        this.capacidad = capacidad;
     }
 
     iniciar() {
@@ -53,5 +56,4 @@ export default class Reactor implements EstadoSetter{
     setTemperatura(temp: number) {
         this.sensor.temperatura = temp;
     }
-
 }

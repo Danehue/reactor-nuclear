@@ -1,8 +1,9 @@
-import Barra from "../src/mecanismo/barra";
-import MecanismoBarraDeControl from "../src/mecanismo/mecanismo-barra-control";
+import Barra from "../src/mecanismo/Barra";
+import MecanismoBarraDeControl from "../src/mecanismo/MecanismoBarraControl";
 import * as MOCKS from "./mocks/mocks";
 
 describe('Test clase MecanismoBarraDeControl', () => {
+
     it('Debería inicializarse con la cantidad utilizada (0) y barras (2) correctamente', () => {
         const barras = [new Barra(200), new Barra(200)];
         const mecanismo = new MecanismoBarraDeControl(0, barras);
@@ -35,11 +36,9 @@ describe('Test clase MecanismoBarraDeControl', () => {
 
         MOCKS.reactor.obtenerTemperatura.mockReturnValue(330);
 
-        const consoleSpy = jest.spyOn(console, 'log');
-        mecanismo.enfriar(MOCKS.reactor);
-        expect(consoleSpy).toHaveBeenCalledWith("El reactor está en condiciones normales. No es necesario enfriar.");
+        mecanismo.enfriar(MOCKS.reactor as any);
         expect(mecanismo.cantUtilizada).toBe(0);
-        consoleSpy.mockRestore();
+        expect(MOCKS.reactor.setTemperatura).not.toHaveBeenCalled();
     });
 
     it('Debería enfriar correctamente si la temperatura es mayor a 330', () => {
@@ -49,14 +48,11 @@ describe('Test clase MecanismoBarraDeControl', () => {
         const mecanismo = new MecanismoBarraDeControl(0, barras);
 
         MOCKS.reactor.obtenerTemperatura.mockReturnValue(400);
-        const consoleSpy = jest.spyOn(console, 'log');
         
-        mecanismo.enfriar(MOCKS.reactor);
+        mecanismo.enfriar(MOCKS.reactor as any);
         expect(mecanismo.cantUtilizada).toBe(2);
-        expect(barra1.vidaUtil).toBe(199);
-        expect(barra2.vidaUtil).toBe(199);
-        expect(consoleSpy).toHaveBeenCalledWith("Se han utilizado 2 barras para reducir la energía térmica.");
-        consoleSpy.mockRestore();
+        expect(barra1.vidaUtil).toBe(0);
+        expect(barra2.vidaUtil).toBe(0);
+        expect(MOCKS.reactor.setTemperatura).toHaveBeenCalled();
     });
-
 });

@@ -1,5 +1,5 @@
 import { Suscriptor } from './Suscriptor';
-import  MecanismoDeControl  from '../mecanismo/mecanismo-de-control';
+import  MecanismoDeControl  from '../mecanismo/MecanismoDeControl';
 import Reactor from '../reactor/Reactor';
 // import { Reactor } from '../reactor/Reactor';
 

@@ -1,5 +1,5 @@
-import Barra from "./barra";
-import MecanismoDeControl from "./mecanismo-de-control";
+import Barra from "./Barra";
+import MecanismoDeControl from "./MecanismoDeControl";
 import Reactor from "../reactor/Reactor";
 
 export default class MecanismoBarraDeControl implements MecanismoDeControl{
@@ -29,6 +29,11 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
         let reduccionTotal = 0;
         let tempReactor = reactor.obtenerTemperatura();
 
+        // Ver con los chicos
+        if(tempReactor <= 330){
+            return;
+        }
+        
         for (const barra of this.barras) {
             const porcentajeReduccion = barra.getPorcentajeReduccion();
             reduccionTotal += porcentajeReduccion;
@@ -39,9 +44,12 @@ export default class MecanismoBarraDeControl implements MecanismoDeControl{
             reactor.setTemperatura(tempFinal);
 
             tempReactor = reactor.getTemperatura()
-            if(tempReactor < 330){
+
+            // Ver con los chicos  
+            if(tempReactor <= 330){
                 break;
             }
+            
         }
 
         console.log(`Se han utilizado ${this.cantUtilizada} barras para reducir la energía térmica.`);
