@@ -1,7 +1,7 @@
 import { Suscriptor } from './Suscriptor';
 import { Operador } from './Operadores';
 import { Jefe } from './Jefe';
-import { CambioEstado } from '../Estado/CambioEstado';
+import { CambioEstado } from '../estado/CambioEstado';
 import Reactor from '../reactor/Reactor';
 // import { Reactor } from '../reactor/Reactor';
 

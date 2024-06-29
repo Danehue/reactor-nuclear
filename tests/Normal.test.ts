@@ -1,8 +1,8 @@
-import Apagado from "../src/Estado/Apagado";
-import { CambioEstado } from "../src/Estado/CambioEstado";
-import Critico from "../src/Estado/Critico";
-import Estado from "../src/Estado/Estado";
-import Normal from "../src/Estado/Normal";
+import Apagado from "../src/estado/Apagado";
+import { CambioEstado } from "../src/estado/CambioEstado";
+import Critico from "../src/estado/Critico";
+import Estado from "../src/estado/Estado";
+import Normal from "../src/estado/Normal";
 import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
 
 describe('Normal', () => {

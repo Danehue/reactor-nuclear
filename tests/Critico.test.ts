@@ -1,9 +1,9 @@
-import { CambioEstado } from "../src/Estado/CambioEstado";
-import Estado from "../src/Estado/Estado";
+import { CambioEstado } from "../src/estado/CambioEstado";
+import Estado from "../src/estado/Estado";
 import { mockEstadoSetter as reactorMock } from './mocks/MockEstadoSetter';
-import Critico from "../src/Estado/Critico";
-import Apagado from "../src/Estado/Apagado";
-import Normal from "../src/Estado/Normal";
+import Critico from "../src/estado/Critico";
+import Apagado from "../src/estado/Apagado";
+import Normal from "../src/estado/Normal";
 
 describe('Critico', () => {
   let instance: Estado;

@@ -1,4 +1,4 @@
-import { CambioEstado } from "../Estado/CambioEstado";
+import { CambioEstado } from "../estado/CambioEstado";
 
 export default class InfoEstadoReactor {
     private mapaInfo: Map<number, number>;

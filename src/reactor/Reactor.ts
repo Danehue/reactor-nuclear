@@ -1,6 +1,6 @@
-import { CambioEstado } from "../Estado/CambioEstado";
-import Estado from "../Estado/Estado";
-import EstadoSetter from "../Estado/EstadoSetter";
+import { CambioEstado } from "../estado/CambioEstado";
+import Estado from "../estado/Estado";
+import EstadoSetter from "../estado/EstadoSetter";
 import MecanismoBarraDeControl from "../mecanismo/MecanismoBarraControl";
 import MecanismoDeControl from "../mecanismo/MecanismoDeControl";
 import { NotificadorEstadoReactor } from "../notificador/NotificadorEstadoReactor";

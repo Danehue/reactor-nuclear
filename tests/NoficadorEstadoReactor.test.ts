@@ -1,7 +1,7 @@
 import { NotificadorEstadoReactor } from '../src/notificador/NotificadorEstadoReactor';
 import { Operador } from '../src/notificador/Operadores';
 import { Jefe } from '../src/notificador/Jefe';
-import { CambioEstado } from "../src/Estado/CambioEstado";
+import { CambioEstado } from "../src/estado/CambioEstado";
 import  Reactor  from '../src/reactor/Reactor';
 import { MockMecanismoDeControl } from './mocks/MockMecanismo';
 import * as MOCKS from "./mocks/mocks";
