@@ -1,4 +1,4 @@
-import EstadoSetter from "../../src/Estado/EstadoSetter";
+import EstadoSetter from "../../src/estado/EstadoSetter";
 
 export const mockEstadoSetter: EstadoSetter = {
     setEstado: jest.fn(),

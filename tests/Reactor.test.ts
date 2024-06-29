@@ -1,10 +1,10 @@
 import Reactor from '../src/reactor/Reactor';
-import Estado from '../src/Estado/Estado';
+import Estado from '../src/estado/Estado';
 import Sensor from '../src/reactor/Sensor';
 import MecanismoDeControl from '../src/mecanismo/MecanismoDeControl';
 import { NotificadorEstadoReactor } from '../src/notificador/NotificadorEstadoReactor';
 import InfoEstadoReactor from '../src/reactor/InfoEstadoReactor';
-import { CambioEstado } from '../src/Estado/CambioEstado';
+import { CambioEstado } from '../src/estado/CambioEstado';
 import * as MOCKS from './mocks/mocks';
 
 describe('Test clase Reactor', () => {

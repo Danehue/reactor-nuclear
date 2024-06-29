@@ -1,4 +1,4 @@
-import { CambioEstado } from "../../src/Estado/CambioEstado";
+import { CambioEstado } from "../../src/estado/CambioEstado";
 
 export const reactor = {
     operadores: [],
